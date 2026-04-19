@@ -3,16 +3,18 @@ import time
 import pandas as pd
 from core.eventos import EventoMercado
 
-class DatafeedBinanceRealtime:
+class DatafeedBybitRealtime: # 🔄 Renombrado para ser honestos
     def __init__(self, simbolo="BTC/USDT", temporalidad="15m"):
-        self.exchange = ccxt.bybit()
+        # Forzamos Bybit
+        self.exchange = ccxt.bybit() 
         self.simbolo = simbolo
         self.temporalidad = temporalidad
         self.ultima_vela_timestamp = None
 
     def bombear_primer_tick(self, cola_eventos):
-        """Carga las últimas velas para que el PIIE tenga memoria inicial."""
-        print(f"📡 Sincronizando memoria histórica de {self.simbolo}...")
+        print(f"📡 Sincronizando memoria histórica de Bybit ({self.simbolo})...")
+        # Bybit a veces prefiere 'BTCUSDT' (sin la barra), CCXT suele manejarlo, 
+        # pero si falla, probaremos quitando la barra.
         ohlcv = self.exchange.fetch_ohlcv(self.simbolo, self.temporalidad, limit=100)
         df = self._convertir_a_df(ohlcv)
         
@@ -22,7 +24,7 @@ class DatafeedBinanceRealtime:
             cola_eventos.put(evento)
         
         self.ultima_vela_timestamp = df.index[-1]
-        print("✅ Memoria sincronizada. Esperando nueva vela en vivo...")
+        print("✅ Memoria de Bybit lista. Esperando vela en vivo...")
 
     def bombear_siguiente_tick(self, cola_eventos):
         """Se bloquea hasta que aparece una nueva vela cerrada en el exchange."""
