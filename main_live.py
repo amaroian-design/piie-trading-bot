@@ -1,7 +1,7 @@
 import time
 import traceback
 from core.motor import motor_dirigido_por_eventos
-from modulos.data_live import DatafeedBinanceRealtime
+from modulos.data_live import DatafeedBybitRealtime
 from modulos.piie import EstrategiaPIIE
 from modulos.riesgo import GestorRiesgoInstitucional
 from modulos.exchange import EmuladorExchange
