@@ -5,7 +5,7 @@ from core.eventos import EventoMercado
 
 class DatafeedBinanceRealtime:
     def __init__(self, simbolo="BTC/USDT", temporalidad="15m"):
-        self.exchange = ccxt.binance()
+        self.exchange = ccxt.bybit()
         self.simbolo = simbolo
         self.temporalidad = temporalidad
         self.ultima_vela_timestamp = None
