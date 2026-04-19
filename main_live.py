@@ -18,8 +18,8 @@ def iniciar_paper_trading_nube():
     # 🛡️ EL ESCUDO DE INMORTALIDAD
     while True:
         try:
-            print("\n⚡ CONECTANDO CABLES AL SERVIDOR DE BINANCE...")
-            datafeed = DatafeedBinanceRealtime(simbolo="BTC/USDT", temporalidad="15m")
+            print("\n⚡ CONECTANDO CABLES AL SERVIDOR DE BYBIT (EUROPA)...")
+            datafeed = DatafeedBybitRealtime(simbolo="BTC/USDT", temporalidad="15m")
             
             # El motor arranca. Si todo va bien, se quedará bloqueado aquí funcionando por meses.
             motor_dirigido_por_eventos(datafeed, estrategia, gestor_riesgo, emulador)
